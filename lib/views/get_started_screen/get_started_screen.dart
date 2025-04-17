@@ -1,5 +1,6 @@
 import 'package:final_project/constants/colors_constants.dart';
 import 'package:final_project/constants/images_constants.dart';
+import 'package:final_project/constants/routs_constants.dart';
 import 'package:flutter/material.dart';
 
 class GetStartedScreen extends StatelessWidget {
@@ -19,11 +20,15 @@ class GetStartedScreen extends StatelessWidget {
           Center(child: Text('in Egypt.',style: TextStyle(color: Colors.white,fontSize: 16),)),
           const SizedBox(height: 16,),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: ElevatedButton(onPressed: (){}, child: Text('LogIn'),),
+            padding: const EdgeInsets.symmetric(horizontal: 36.0),
+            child: ElevatedButton(onPressed: (){
+              Navigator.pushNamed(context, logInScreen);
+            }, child: Text('LogIn'),),
           ),
           const SizedBox(height: 8,),
-          TextButton(onPressed: (){}, child: Text('Create an Account',style: TextStyle(color: Colors.white),)),
+          TextButton(onPressed: (){
+            Navigator.pushNamed(context, registerScreen);
+          }, child: Text('Create an Account',style: TextStyle(color: Colors.white),)),
         ],
       ),
     );

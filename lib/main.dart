@@ -1,4 +1,6 @@
 import 'package:final_project/views/get_started_screen/get_started_screen.dart';
+import 'package:final_project/views/login_register_screens/screens/login_screen.dart';
+import 'package:final_project/views/login_register_screens/screens/register_screen.dart';
 import 'package:final_project/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +21,8 @@ class LoopiApp extends StatelessWidget {
       routes: {
         splashScreen : (context) => SplashScreen(),
         getStartedScreen : (context) => GetStartedScreen(),
+        logInScreen : (context) => LoginScreen(),
+        registerScreen : (context) => RegisterScreen(),
       },
       initialRoute: splashScreen,
     );

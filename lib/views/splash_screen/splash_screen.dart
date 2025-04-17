@@ -1,5 +1,5 @@
 import 'package:final_project/constants/colors_constants.dart';
-import 'package:final_project/views/get_started_screen/get_started_screen.dart';
+import 'package:final_project/constants/routs_constants.dart';
 import 'package:final_project/views/splash_screen/widgets/splash_view_body.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds:3 ) ,() {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GetStartedScreen(),));
+      Navigator.pushReplacementNamed(context, getStartedScreen);
     },);
   }
   @override
