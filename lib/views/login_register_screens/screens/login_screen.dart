@@ -25,13 +25,20 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
-              TextFormFieldCustom(labelTitle: 'Email'),
-              TextFormFieldCustom(labelTitle: 'Password'),
+              TextFormFieldCustom(labelTitle: 'Email',onChanged: (p0) {
+                
+              },),
+              TextFormFieldCustom(labelTitle: 'Password',onChanged: (p0) {
+                
+              },),
               SizedBox(height: 10),
               ButtonCustom(
                 buttonTitle: 'Login',
                 buttonColor: MyColor.kButtonLoginColor,
                 textColor: Colors.white,
+                onTap: () {
+                  
+                },
               ),
               SizedBox(height: 10),
               Text('or Sign in With'),
@@ -40,6 +47,9 @@ class LoginScreen extends StatelessWidget {
                 buttonTitle: 'LogIn with Google',
                 buttonColor: MyColor.kButtonGoogleColor,
                 textColor: Colors.black,
+                onTap: () {
+                  
+                },
               ),
               SizedBox(height: 10),
               TextButtonCustom(
