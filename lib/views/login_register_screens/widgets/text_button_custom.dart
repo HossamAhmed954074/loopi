@@ -1,17 +1,14 @@
-import 'package:final_project/constants/routs_constants.dart';
 import 'package:flutter/material.dart';
 
 class TextButtonCustom extends StatelessWidget {
-  const TextButtonCustom({required this.textButton, super.key});
+  const TextButtonCustom({required this.textButton,required this.onPressed, super.key});
 
   final String textButton;
-
+  final Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-        Navigator.pushNamed(context, registerScreen);
-      },
+      onPressed: onPressed,
       child: Text(textButton, style: TextStyle(color: Colors.blue)),
     );
   }

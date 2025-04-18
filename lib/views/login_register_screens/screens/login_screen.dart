@@ -1,4 +1,5 @@
 import 'package:final_project/constants/colors_constants.dart';
+import 'package:final_project/constants/routs_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/button_custom_widget.dart';
@@ -18,6 +19,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(height: 40),
               Text(
                 'Login',
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
@@ -35,12 +37,15 @@ class LoginScreen extends StatelessWidget {
               Text('or Sign in With'),
               SizedBox(height: 10),
               ButtonCustom(
-                buttonTitle: 'Continue with Google',
+                buttonTitle: 'LogIn with Google',
                 buttonColor: MyColor.kButtonGoogleColor,
                 textColor: Colors.black,
               ),
               SizedBox(height: 10),
-              TextButtonCustom(textButton: 'Create an Account'),
+              TextButtonCustom(
+                textButton: 'Create an Account',
+                onPressed: () => Navigator.pushNamed(context, registerScreen),
+              ),
             ],
           ),
         ),
