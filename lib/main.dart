@@ -29,8 +29,8 @@ class LoopiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-       BlocProvider(create: (context) => LoginRegisterCubit(),),
-       BlocProvider(create: (context) => BottomNavigationBarCubit(),),
+        BlocProvider(create: (context) => LoginRegisterCubit()),
+        BlocProvider(create: (context) => BottomNavigationBarCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -39,11 +39,11 @@ class LoopiApp extends StatelessWidget {
           getStartedScreen: (context) => GetStartedScreen(),
           logInScreen: (context) => LoginScreen(),
           registerScreen: (context) => RegisterScreen(),
-          homeScreen : (context) => HomeScreen(),
-          profileScreen : (context) => ProfileScreen(),
-          tiketScreen : (context) => TiketScreen(),
-          phoneScreen : (context) => PhoneScreen(),
-          otpScreen : (context) => OtpScreen(),
+          homeScreen: (context) => HomeScreen(),
+          profileScreen: (context) => ProfileScreen(),
+          tiketScreen: (context) => TiketScreen(),
+          phoneScreen: (context) => PhoneScreen(),
+          otpScreen: (context) => OtpScreen(),
         },
         initialRoute: splashScreen,
       ),

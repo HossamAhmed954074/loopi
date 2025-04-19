@@ -26,7 +26,7 @@ class BuildPinCodeFields extends StatelessWidget {
         activeColor: MyColor.kBlue,
         inactiveColor: MyColor.kBlue,
         inactiveFillColor: Colors.white,
-        activeFillColor: MyColor.kBlue,
+        activeFillColor: MyColor.kLightBlue,
         selectedColor: MyColor.kBlue,
         selectedFillColor: Colors.white,
       ),
