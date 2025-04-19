@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
         if(state is LoginRegisterLoading){
           isLoading =true;
         }else if(state is LoginRegisterSuccess){
-          //  todo navigat to next screen
+          Navigator.pushReplacementNamed(context, homeScreen);
           snackBarCustom(context, 'LogIn successfully');
           isLoading = false;
         }else if(state is LoginRegisterFailure){

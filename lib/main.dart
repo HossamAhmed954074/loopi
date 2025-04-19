@@ -1,6 +1,7 @@
 import 'package:final_project/cubits/login_register_cubit/login_register_cubit.dart';
 import 'package:final_project/firebase_options.dart';
 import 'package:final_project/views/get_started_screen/get_started_screen.dart';
+import 'package:final_project/views/home_screen/screens/home_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/login_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/register_screen.dart';
 import 'package:final_project/views/splash_screen/splash_screen.dart';
@@ -30,6 +31,7 @@ class LoopiApp extends StatelessWidget {
           getStartedScreen: (context) => GetStartedScreen(),
           logInScreen: (context) => LoginScreen(),
           registerScreen: (context) => RegisterScreen(),
+          homeScreen : (context) => HomeScreen(),
         },
         initialRoute: splashScreen,
       ),
