@@ -1,3 +1,4 @@
+import 'package:final_project/cubits/login_register_cubit/login_register_cubit.dart';
 import 'package:final_project/firebase_options.dart';
 import 'package:final_project/views/get_started_screen/get_started_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/login_screen.dart';
@@ -5,6 +6,7 @@ import 'package:final_project/views/login_register_screens/screens/register_scre
 import 'package:final_project/views/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'constants/routs_constants.dart';
 
@@ -19,15 +21,18 @@ class LoopiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        splashScreen: (context) => SplashScreen(),
-        getStartedScreen: (context) => GetStartedScreen(),
-        logInScreen: (context) => LoginScreen(),
-        registerScreen: (context) => RegisterScreen(),
-      },
-      initialRoute: splashScreen,
+    return BlocProvider(
+      create: (context) => LoginRegisterCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          splashScreen: (context) => SplashScreen(),
+          getStartedScreen: (context) => GetStartedScreen(),
+          logInScreen: (context) => LoginScreen(),
+          registerScreen: (context) => RegisterScreen(),
+        },
+        initialRoute: splashScreen,
+      ),
     );
   }
 }

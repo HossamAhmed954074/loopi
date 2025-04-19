@@ -9,6 +9,11 @@ class TextFormFieldCustom extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16),
       child: TextFormField(
+        validator: (value) {
+          if(value!.isEmpty){
+            return 'field is required';
+          }
+        },
         onChanged: onChanged,
         decoration: InputDecoration(
           border: OutlineInputBorder(
