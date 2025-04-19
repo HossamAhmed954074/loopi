@@ -12,20 +12,22 @@ import '../widgets/text_form_field_custom_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-   String? email , password;
+
+  String? email, password;
   GlobalKey<FormState> formKey = GlobalKey();
-  bool isLoading  = false;
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginRegisterCubit, LoginRegisterState>(
       listener: (context, state) {
-        if(state is LoginRegisterLoading){
-          isLoading =true;
-        }else if(state is LoginRegisterSuccess){
+        if (state is LoginRegisterLoading) {
+          isLoading = true;
+        } else if (state is LoginRegisterSuccess) {
           Navigator.pushReplacementNamed(context, homeScreen);
           snackBarCustom(context, 'LogIn successfully');
           isLoading = false;
-        }else if(state is LoginRegisterFailure){
+        } else if (state is LoginRegisterFailure) {
           snackBarCustom(context, state.errorMessage);
           isLoading = false;
         }
@@ -47,16 +49,23 @@ class LoginScreen extends StatelessWidget {
                       Text(
                         'Login',
                         style: TextStyle(
-                            fontSize: 32, fontWeight: FontWeight.bold),
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       SizedBox(height: 40),
-                      TextFormFieldCustom(labelTitle: 'Email', onChanged: (val) {
-                         email = val;
-                      },),
                       TextFormFieldCustom(
-                        labelTitle: 'Password', onChanged: (val) {
-                       password = val;
-                      },),
+                        labelTitle: 'Email',
+                        onChanged: (val) {
+                          email = val;
+                        },
+                      ),
+                      TextFormFieldCustom(
+                        labelTitle: 'Password',
+                        onChanged: (val) {
+                          password = val;
+                        },
+                      ),
                       SizedBox(height: 10),
                       ButtonCustom(
                         buttonTitle: 'Login',
@@ -64,28 +73,28 @@ class LoginScreen extends StatelessWidget {
                         textColor: Colors.white,
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
-                          BlocProvider.of<LoginRegisterCubit>(context).LoginUser(email: email!, password: password!);
-                          } else {
-
-                          }
+                            BlocProvider.of<LoginRegisterCubit>(
+                              context,
+                            ).LoginUser(email: email!, password: password!);
+                          } else {}
                         },
                       ),
                       SizedBox(height: 10),
                       Text('or Sign in With'),
                       SizedBox(height: 10),
                       ButtonCustom(
-                        buttonTitle: 'LogIn with Google',
+                        buttonTitle: 'LogIn with Phone',
                         buttonColor: MyColor.kButtonGoogleColor,
                         textColor: Colors.black,
                         onTap: () {
-
+                          Navigator.pushNamed(context, phoneScreen);
                         },
                       ),
                       SizedBox(height: 10),
                       TextButtonCustom(
                         textButton: 'Create an Account',
-                        onPressed: () =>
-                            Navigator.pushNamed(context, registerScreen),
+                        onPressed:
+                            () => Navigator.pushNamed(context, registerScreen),
                       ),
                     ],
                   ),

@@ -4,6 +4,8 @@ import 'package:final_project/firebase_options.dart';
 import 'package:final_project/views/get_started_screen/get_started_screen.dart';
 import 'package:final_project/views/home_screen/screens/home_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/login_screen.dart';
+import 'package:final_project/views/login_register_screens/screens/otp_screen.dart';
+import 'package:final_project/views/login_register_screens/screens/phone_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/register_screen.dart';
 import 'package:final_project/views/profile_screen/screens/profile_screen.dart';
 import 'package:final_project/views/splash_screen/splash_screen.dart';
@@ -40,6 +42,8 @@ class LoopiApp extends StatelessWidget {
           homeScreen : (context) => HomeScreen(),
           profileScreen : (context) => ProfileScreen(),
           tiketScreen : (context) => TiketScreen(),
+          phoneScreen : (context) => PhoneScreen(),
+          otpScreen : (context) => OtpScreen(),
         },
         initialRoute: splashScreen,
       ),
