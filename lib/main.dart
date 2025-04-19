@@ -1,10 +1,13 @@
+import 'package:final_project/cubits/botom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:final_project/cubits/login_register_cubit/login_register_cubit.dart';
 import 'package:final_project/firebase_options.dart';
 import 'package:final_project/views/get_started_screen/get_started_screen.dart';
 import 'package:final_project/views/home_screen/screens/home_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/login_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/register_screen.dart';
+import 'package:final_project/views/profile_screen/screens/profile_screen.dart';
 import 'package:final_project/views/splash_screen/splash_screen.dart';
+import 'package:final_project/views/tiket_screen/screens/tiket_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +25,11 @@ class LoopiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginRegisterCubit(),
+    return MultiBlocProvider(
+      providers: [
+       BlocProvider(create: (context) => LoginRegisterCubit(),),
+       BlocProvider(create: (context) => BottomNavigationBarCubit(),),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
@@ -32,6 +38,8 @@ class LoopiApp extends StatelessWidget {
           logInScreen: (context) => LoginScreen(),
           registerScreen: (context) => RegisterScreen(),
           homeScreen : (context) => HomeScreen(),
+          profileScreen : (context) => ProfileScreen(),
+          tiketScreen : (context) => TiketScreen(),
         },
         initialRoute: splashScreen,
       ),
