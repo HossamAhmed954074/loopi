@@ -1,5 +1,6 @@
 import 'package:final_project/cubits/botom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:final_project/cubits/login_register_cubit/login_register_cubit.dart';
+import 'package:final_project/cubits/map_cubit/map_cubit.dart';
 import 'package:final_project/firebase_options.dart';
 import 'package:final_project/views/get_started_screen/get_started_screen.dart';
 import 'package:final_project/views/home_screen/screens/home_screen.dart';
@@ -9,16 +10,26 @@ import 'package:final_project/views/login_register_screens/screens/phone_screen.
 import 'package:final_project/views/login_register_screens/screens/register_screen.dart';
 import 'package:final_project/views/profile_screen/screens/profile_screen.dart';
 import 'package:final_project/views/splash_screen/splash_screen.dart';
+import 'package:final_project/views/tiket_screen/screens/map_screen.dart';
 import 'package:final_project/views/tiket_screen/screens/tiket_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'constants/routs_constants.dart';
-
+late String initialRoute;
 main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseAuth.instance.authStateChanges().listen((user) {
+    if(user == null){
+      initialRoute = getStartedScreen;
+    }else{
+      initialRoute = homeScreen;
+    }
+  },);
   runApp(const LoopiApp());
 }
 
@@ -27,10 +38,12 @@ class LoopiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginRegisterCubit()),
         BlocProvider(create: (context) => BottomNavigationBarCubit()),
+        BlocProvider(create: (context) => MapCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -44,8 +57,9 @@ class LoopiApp extends StatelessWidget {
           tiketScreen: (context) => TiketScreen(),
           phoneScreen: (context) => PhoneScreen(),
           otpScreen: (context) => OtpScreen(),
+          mapScreen: (context) => MapScreen(),
         },
-        initialRoute: splashScreen,
+        initialRoute: initialRoute,
       ),
     );
   }

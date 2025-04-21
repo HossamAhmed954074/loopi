@@ -59,7 +59,7 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
     emit(LoginRegisterLoading());
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '+2$phoneNumber',
-      timeout: const Duration(seconds: 14),
+      timeout: const Duration(minutes: 2),
       verificationCompleted: verificationCompleted,
       verificationFailed: verificationFailed,
       codeSent: codeSent,

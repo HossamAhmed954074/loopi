@@ -1,0 +1,100 @@
+import 'dart:async';
+
+import 'package:final_project/constants/colors_constants.dart';
+import 'package:final_project/helpers/location_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+class MapScreen extends StatefulWidget {
+  const MapScreen({super.key});
+
+  @override
+  State<MapScreen> createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  static Position? position;
+  Completer<GoogleMapController> mapController = Completer();
+  static final CameraPosition _myCurrentLocationCamiraPosition = CameraPosition(
+    target: LatLng(position!.latitude, position!.longitude),
+    tilt: 0.0,
+    zoom: 17,
+    bearing: 0.0,
+  );
+
+  @override
+  void initState() {
+
+    super.initState();
+    getCurrentLocation();
+  }
+  Future<void> getCurrentLocation() async {
+    await LocationHelper.getCurrentLocation();
+    position = await Geolocator.getLastKnownPosition().whenComplete(() {
+      setState(() {});
+    });
+  }
+
+  Future<void> goToCurrentLocation() async {
+    final GoogleMapController _controller = await mapController.future;
+    _controller.animateCamera(
+      CameraUpdate.newCameraPosition(_myCurrentLocationCamiraPosition),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          position != null
+              ? MapBody(
+                initialCameraPosition: _myCurrentLocationCamiraPosition,
+                controller: (c) => mapController.complete(c),
+              )
+              : Center(
+                child: Container(
+                  child: CircularProgressIndicator(color: MyColor.kBlue),
+                ),
+              ),
+        ],
+      ),
+      floatingActionButton: Container(
+        width: 50,
+        height: 50,
+        margin: EdgeInsets.fromLTRB(0, 0, 8, 30),
+        child: FloatingActionButton(
+          onPressed: () {
+            goToCurrentLocation();
+          },
+          backgroundColor: MyColor.kBlue,
+          child: Icon(Icons.place, color: Colors.white,),
+        ),
+      ),
+    );
+  }
+}
+
+class MapBody extends StatelessWidget {
+ const MapBody({
+    super.key,
+    required this.initialCameraPosition,
+    required this.controller,
+  });
+
+  final CameraPosition initialCameraPosition;
+  final Function(GoogleMapController) controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return GoogleMap(
+      initialCameraPosition: initialCameraPosition,
+      mapType: MapType.normal,
+      myLocationEnabled: true,
+      zoomControlsEnabled: false,
+      myLocationButtonEnabled: false,
+      onMapCreated: controller,
+    );
+  }
+}

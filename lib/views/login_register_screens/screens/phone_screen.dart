@@ -12,7 +12,7 @@ class PhoneScreen extends StatelessWidget {
   PhoneScreen({super.key});
 
   final GlobalKey<FormState> formState = GlobalKey();
-  String? keyNumber, phoneNumber;
+  String? phoneNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +60,6 @@ class PhoneScreen extends StatelessWidget {
                       SizedBox(height: 50),
                       Row(
                         children: [
-                          Expanded(
-                            flex: 1,
-                            child: TextFormFieldCustom(
-                              labelTitle: 'key',
-                              onChanged: (val) => keyNumber = val,
-                            ),
-                          ),
                           Expanded(
                             flex: 3,
                             child: TextFormFieldCustom(
