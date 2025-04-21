@@ -9,10 +9,14 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
   late String verificationId;
   FirebaseAuth auth = FirebaseAuth.instance;
 
+  String? email;
+  String? phone;
+
   Future<void> registerUser({
     required String email,
     required String password,
   }) async {
+
     emit(LoginRegisterLoading());
     try {
       final _ = await auth.createUserWithEmailAndPassword(
@@ -37,7 +41,9 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
     required String email,
     required String password,
   }) async {
+
     emit(LoginRegisterLoading());
+    this.email = email;
     try {
       final _ = await auth.signInWithEmailAndPassword(
         email: email,
@@ -57,7 +63,9 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
 
   Future<void> submitedPhoneNumber(String phoneNumber) async {
     emit(LoginRegisterLoading());
+
     await FirebaseAuth.instance.verifyPhoneNumber(
+
       phoneNumber: '+2$phoneNumber',
       timeout: const Duration(minutes: 2),
       verificationCompleted: verificationCompleted,
@@ -65,6 +73,7 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
       codeSent: codeSent,
       codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
     );
+    phone = phoneNumber;
   }
 
   void verificationCompleted(PhoneAuthCredential credential) async {

@@ -18,18 +18,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'constants/routs_constants.dart';
-late String initialRoute;
-main() async {
+import 'cubits/app_theme_color/app_theme_cubit.dart';
 
+late String initialRoute;
+
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseAuth.instance.authStateChanges().listen((user) {
-    if(user == null){
+    if (user == null) {
       initialRoute = getStartedScreen;
-    }else{
+    } else {
       initialRoute = homeScreen;
     }
-  },);
+  });
   runApp(const LoopiApp());
 }
 
@@ -38,28 +40,35 @@ class LoopiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginRegisterCubit()),
         BlocProvider(create: (context) => BottomNavigationBarCubit()),
         BlocProvider(create: (context) => MapCubit()),
+        BlocProvider(create: (context) => AppThemeCubit()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: {
-          splashScreen: (context) => SplashScreen(),
-          getStartedScreen: (context) => GetStartedScreen(),
-          logInScreen: (context) => LoginScreen(),
-          registerScreen: (context) => RegisterScreen(),
-          homeScreen: (context) => HomeScreen(),
-          profileScreen: (context) => ProfileScreen(),
-          tiketScreen: (context) => TiketScreen(),
-          phoneScreen: (context) => PhoneScreen(),
-          otpScreen: (context) => OtpScreen(),
-          mapScreen: (context) => MapScreen(),
+      child: BlocBuilder<AppThemeCubit, AppThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            theme: BlocProvider
+                .of<AppThemeCubit>(context)
+                .isTheme ? ThemeData.dark() : ThemeData.light(),
+            debugShowCheckedModeBanner: false,
+            routes: {
+              splashScreen: (context) => SplashScreen(),
+              getStartedScreen: (context) => GetStartedScreen(),
+              logInScreen: (context) => LoginScreen(),
+              registerScreen: (context) => RegisterScreen(),
+              homeScreen: (context) => HomeScreen(),
+              profileScreen: (context) => ProfileScreen(),
+              tiketScreen: (context) => TiketScreen(),
+              phoneScreen: (context) => PhoneScreen(),
+              otpScreen: (context) => OtpScreen(),
+              mapScreen: (context) => MapScreen(),
+            },
+            initialRoute: initialRoute,
+          );
         },
-        initialRoute: initialRoute,
       ),
     );
   }
