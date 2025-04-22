@@ -32,16 +32,19 @@ class ProfileScreen extends StatelessWidget {
                   child: SizedBox.fromSize(
                     size: Size.fromRadius(48), // Image radius
                     child: Image.asset(
-                      'assets/images/loopi_logo.png',
+                      'assets/images/icon.png',
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
                 child: Text(
-                  '01060328803',
+                  '${BlocProvider.of<LoginRegisterCubit>(context).getLoggedInUser().phoneNumber}',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -52,10 +55,8 @@ class ProfileScreen extends StatelessWidget {
                 leadingIcon: FontAwesomeIcons.person,
                 title: 'Profile Details',
                 trailing: Icon(Icons.arrow_forward_ios),
-          
-                onTap: () {
-          
-                },
+
+                onTap: () {},
               ),
               DividerCustomWidget(),
               const SizedBox(height: 10),
@@ -64,23 +65,22 @@ class ProfileScreen extends StatelessWidget {
                 title: 'Dark Mode',
                 trailing: CupertinoSwitch(
                   value: BlocProvider.of<AppThemeCubit>(context).isTheme,
-                  onChanged:(val) => BlocProvider.of<AppThemeCubit>(context).changeTheme(val),
+                  onChanged:
+                      (val) => BlocProvider.of<AppThemeCubit>(
+                        context,
+                      ).changeTheme(val),
                 ),
-          
-                onTap: () {
-          
-                },
+
+                onTap: () {},
               ),
               DividerCustomWidget(),
               const SizedBox(height: 10),
               ListItemButton(
-                leadingIcon: FontAwesomeIcons.history,
+                leadingIcon: FontAwesomeIcons.clockRotateLeft,
                 title: 'Ticket History',
                 trailing: Icon(Icons.arrow_forward_ios),
-          
-                onTap: () {
-          
-                },
+
+                onTap: () {},
               ),
               const SizedBox(height: 10),
               DividerCustomWidget(),
@@ -89,10 +89,8 @@ class ProfileScreen extends StatelessWidget {
                 leadingIcon: Icons.settings,
                 title: 'Settings',
                 trailing: Icon(Icons.arrow_forward_ios),
-          
-                onTap: () {
-          
-                },
+
+                onTap: () {},
               ),
               const SizedBox(height: 10),
               DividerCustomWidget(),
@@ -101,9 +99,8 @@ class ProfileScreen extends StatelessWidget {
                 leadingIcon: Icons.help,
                 title: 'Help',
                 trailing: Icon(Icons.arrow_forward_ios),
-          
-                onTap: () {
-                },
+
+                onTap: () {},
               ),
               const SizedBox(height: 10),
               DividerCustomWidget(),
@@ -112,13 +109,12 @@ class ProfileScreen extends StatelessWidget {
                 leadingIcon: FontAwesomeIcons.backward,
                 title: 'LogOut',
                 trailing: Icon(Icons.arrow_back_ios_new),
-          
-                onTap: () async{
+
+                onTap: () async {
                   await loginRegisterCubit.logOut();
                   Navigator.pushReplacementNamed(context, getStartedScreen);
                 },
               ),
-          
             ],
           ),
         ),
@@ -126,8 +122,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-

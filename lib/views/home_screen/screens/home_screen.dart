@@ -6,11 +6,15 @@ import 'package:final_project/views/tiket_screen/screens/tiket_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../apis/map_api/place_suggestion_api.dart';
+
 class HomeScreen extends StatelessWidget {
  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    PlaceSuggestionApi().fetchSuggestion('za', 'jscbnhabchab41554');
+
     return BlocBuilder<BottomNavigationBarCubit, BottomNavigationBarState>(
       builder: (context, state) {
         return Scaffold(

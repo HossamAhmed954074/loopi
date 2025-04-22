@@ -17,7 +17,7 @@ class TiketScreen extends StatelessWidget {
               buttonTitle: 'get current Location',
               buttonColor: Colors.grey,
               onTap: () {
-                Navigator.pushReplacementNamed(context, mapScreen);
+                Navigator.pushNamed(context, mapScreen);
               },
             ),
           ),
