@@ -17,10 +17,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'apis/map_api/place_suggestion_api.dart';
 import 'constants/routs_constants.dart';
 import 'cubits/app_theme_color/app_theme_cubit.dart';
-import 'cubits/suggestion_place/suggestion_place_cubit.dart';
 
 late String initialRoute;
 
@@ -48,7 +46,7 @@ class LoopiApp extends StatelessWidget {
         BlocProvider(create: (context) => BottomNavigationBarCubit()),
         BlocProvider(create: (context) => MapCubit()),
         BlocProvider(create: (context) => AppThemeCubit()),
-        BlocProvider(create: (context) => SuggestionPlaceCubit()),
+
       ],
       child: BlocBuilder<AppThemeCubit, AppThemeState>(
         builder: (context, state) {

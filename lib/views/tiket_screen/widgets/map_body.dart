@@ -5,15 +5,17 @@ class MapBody extends StatelessWidget {
   const MapBody({
     super.key,
     required this.initialCameraPosition,
-    required this.controller,
+    required this.controller, required this.marker,
   });
-
+  final Set<Marker> marker;
   final CameraPosition initialCameraPosition;
   final Function(GoogleMapController) controller;
 
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
+
+      markers: marker,
       initialCameraPosition: initialCameraPosition,
       mapType: MapType.normal,
       myLocationEnabled: true,

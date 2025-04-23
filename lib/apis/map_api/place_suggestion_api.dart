@@ -19,7 +19,7 @@ class PlaceSuggestionApi {
         baseUrl,
         queryParameters: {
           'input': place,
-          'type': 'address',
+          'type': 'university',
           'components': 'country:eg',
           'sessiontoken': sessionTaken,
           'key': apiKey,

@@ -1,18 +1,23 @@
+import 'package:final_project/models/map_place_details/map_place_details.dart';
 import 'package:final_project/views/tiket_screen/widgets/suggest_places_list_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 
+import '../../../models/map_auto_complet/place_sugestion.dart';
+
 class BuildFloatingSearchBar extends StatelessWidget {
-  const BuildFloatingSearchBar({
+  BuildFloatingSearchBar({
     super.key,
     required this.onChange,
-    required this.onPressed,
     required this.onFocusChanged,
+    required this.onTap,
     required this.controller,
   });
 
+  final Function(PlaceSuggestion) onTap;
+
   final Function(String) onChange;
-  final Function() onPressed;
   final Function(bool) onFocusChanged;
   final FloatingSearchBarController controller;
 
@@ -41,7 +46,7 @@ class BuildFloatingSearchBar extends StatelessWidget {
           showIfOpened: false,
           child: CircularButton(
             icon: const Icon(Icons.place),
-            onPressed: onPressed,
+            onPressed: () {},
           ),
         ),
         FloatingSearchBarAction.searchToClear(showIfClosed: false),
@@ -52,10 +57,13 @@ class BuildFloatingSearchBar extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
-            children: [SuggestionPlacesList()],
+            children: [
+              SuggestionPlacesList(onTap: onTap, controller: controller),
+            ],
           ),
         );
       },
     );
   }
 }
+
