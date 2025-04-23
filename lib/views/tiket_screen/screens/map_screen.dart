@@ -1,13 +1,11 @@
 import 'dart:developer';
-
 import 'package:final_project/cubits/map_cubit/map_cubit.dart';
 import 'package:final_project/models/map_auto_complet/place_sugestion.dart';
-import 'package:final_project/models/map_place_details/map_place_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
-import 'package:uuid/uuid.dart';
+import '../../../models/map_place_direction/map_place_direction.dart';
 import '../../login_register_screens/widgets/snackBarCustom.dart';
 import '../widgets/circle_progress_indecator.dart';
 import '../widgets/floating_action_current_location_button_custom_widget.dart';
@@ -18,16 +16,15 @@ class MapScreen extends StatefulWidget {
   MapScreen({super.key});
 
   @override
-  State<MapScreen> createState() => _MapScreenState();
+  State<MapScreen> createState() => MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class MapScreenState extends State<MapScreen> {
   Set<Marker> markers = Set();
   late PlaceSuggestion placeSuggestion;
-
   final FloatingSearchBarController controller = FloatingSearchBarController();
 
-
+  MapPlaceDirectionAndAllData? mapPlaceDirectionAndAllData;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MapCubit, MapState>(
@@ -35,6 +32,15 @@ class _MapScreenState extends State<MapScreen> {
       listener: (context, state) {
         if (state is MapFailure) {
           snackBarCustom(context, state.errorMassage);
+        }
+        if(state is MarkerSuccess){
+          markers.add(state.marker);
+        }
+        if(state is DirectionSuccess){
+          mapPlaceDirectionAndAllData = state.mapPlaceDirectionAndAllData;
+        }
+        if(state is DetailsPlacesSuccess){
+          markers.add(state.marker);
         }
       },
       builder: (context, state) {
@@ -47,6 +53,7 @@ class _MapScreenState extends State<MapScreen> {
                 state is MapLoading
                     ? CircleProgressIndecator()
                     : MapBody(
+                      mapPlaceDirectionAndAllData: mapPlaceDirectionAndAllData,
                       marker: markers,
                       initialCameraPosition:
                           BlocProvider.of<MapCubit>(
@@ -60,28 +67,21 @@ class _MapScreenState extends State<MapScreen> {
                 BuildFloatingSearchBar(
                   controller: controller,
                   onChange: (val) {
-
                     BlocProvider.of<MapCubit>(
                       context,
                     ).getAllSuggestionPlace(val);
                   },
-                  onFocusChanged: (isBool) {},
-                  onTap: (val)  {
+                  onFocusChanged: (isBool) {
                     setState(() {
                       markers.clear();
                     });
+                  },
+                  onTap: (val) {
                     placeSuggestion = val;
-                    log(placeSuggestion.placeId);
                     BlocProvider.of<MapCubit>(
                       context,
                     ).getPlaceLocationDetails(val.placeId);
-                    setState(() {
 
-                    });
-                    markers.add( BlocProvider.of<MapCubit>(context).markerlo!);
-                    setState(() {
-
-                    });
                   },
                 ),
               ],
@@ -90,11 +90,10 @@ class _MapScreenState extends State<MapScreen> {
           floatingActionButton: FloatingActionCurrentLocationButtonCustomWidget(
             onPressed: () {
               BlocProvider.of<MapCubit>(context).goToCurrentLocation();
-              setState(() {
-
-              });
-              markers.add( BlocProvider.of<MapCubit>(context).markerMe!);
-              setState(() {});
+              BlocProvider.of<MapCubit>(
+                context,
+              ).getDirectionAndAllData( end: placeSuggestion.placeId);
+              log('*************${mapPlaceDirectionAndAllData!.startAddress}**********${mapPlaceDirectionAndAllData!.endAddress}');
             },
           ),
         );

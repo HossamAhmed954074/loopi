@@ -1,10 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
-
 import '../../../models/map_auto_complet/place_sugestion.dart';
-import '../../../models/map_place_details/map_place_details.dart';
 import 'list_view_suggest_item.dart';
 
 class ListViewBody extends StatelessWidget {

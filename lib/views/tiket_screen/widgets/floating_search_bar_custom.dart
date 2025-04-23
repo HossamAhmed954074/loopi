@@ -1,10 +1,8 @@
-import 'package:final_project/models/map_place_details/map_place_details.dart';
 import 'package:final_project/views/tiket_screen/widgets/suggest_places_list_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
-
 import '../../../models/map_auto_complet/place_sugestion.dart';
+import '../../../models/map_place_direction/map_place_direction.dart';
 
 class BuildFloatingSearchBar extends StatelessWidget {
   BuildFloatingSearchBar({
@@ -21,6 +19,7 @@ class BuildFloatingSearchBar extends StatelessWidget {
   final Function(bool) onFocusChanged;
   final FloatingSearchBarController controller;
 
+  MapPlaceDirectionAndAllData? mapPlaceDirectionAndAllData;
   @override
   Widget build(BuildContext context) {
     final isPortrait =
@@ -57,7 +56,8 @@ class BuildFloatingSearchBar extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children:
+            [
               SuggestionPlacesList(onTap: onTap, controller: controller),
             ],
           ),
