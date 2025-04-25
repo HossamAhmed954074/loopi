@@ -1,13 +1,16 @@
 import 'dart:developer';
+import 'package:final_project/constants/routs_constants.dart';
 import 'package:final_project/cubits/map_cubit/map_cubit.dart';
 import 'package:final_project/models/map_auto_complet/place_sugestion.dart';
+import 'package:final_project/views/payment_screen/widgets/loading_indecator_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
+import '../../../constants/colors_constants.dart';
 import '../../../models/map_place_direction/map_place_direction.dart';
 import '../../login_register_screens/widgets/snackBarCustom.dart';
-import '../widgets/circle_progress_indecator.dart';
 import '../widgets/floating_action_current_location_button_custom_widget.dart';
 import '../widgets/floating_search_bar_custom.dart';
 import '../widgets/map_body.dart';
@@ -23,8 +26,10 @@ class MapScreenState extends State<MapScreen> {
   Set<Marker> markers = Set();
   late PlaceSuggestion placeSuggestion;
   final FloatingSearchBarController controller = FloatingSearchBarController();
+  bool iss = false;
 
   MapPlaceDirectionAndAllData? mapPlaceDirectionAndAllData;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MapCubit, MapState>(
@@ -33,13 +38,13 @@ class MapScreenState extends State<MapScreen> {
         if (state is MapFailure) {
           snackBarCustom(context, state.errorMassage);
         }
-        if(state is MarkerSuccess){
+        if (state is MarkerSuccess) {
           markers.add(state.marker);
         }
-        if(state is DirectionSuccess){
+        if (state is DirectionSuccess) {
           mapPlaceDirectionAndAllData = state.mapPlaceDirectionAndAllData;
         }
-        if(state is DetailsPlacesSuccess){
+        if (state is DetailsPlacesSuccess) {
           markers.add(state.marker);
         }
       },
@@ -51,7 +56,7 @@ class MapScreenState extends State<MapScreen> {
               fit: StackFit.expand,
               children: [
                 state is MapLoading
-                    ? CircleProgressIndecator()
+                    ? LoadingIndecatorCustomWidget()
                     : MapBody(
                       mapPlaceDirectionAndAllData: mapPlaceDirectionAndAllData,
                       marker: markers,
@@ -73,6 +78,7 @@ class MapScreenState extends State<MapScreen> {
                   },
                   onFocusChanged: (isBool) {
                     setState(() {
+                      iss = false;
                       markers.clear();
                     });
                   },
@@ -81,20 +87,48 @@ class MapScreenState extends State<MapScreen> {
                     BlocProvider.of<MapCubit>(
                       context,
                     ).getPlaceLocationDetails(val.placeId);
-
                   },
+                ),
+
+                Positioned(
+                  bottom: 12,
+                  left: 12,
+                  child: SizedBox(
+                    width: 70,
+                    height: 70,
+                    child:
+                        iss
+                            ? FloatingActionCurrentLocationButtonCustomWidget(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  tiketScreen,
+                                  arguments: mapPlaceDirectionAndAllData,
+                                );
+                              },
+                              iconData: Icon(
+                                FontAwesomeIcons.check,
+                                color: Colors.white,
+                              ),
+                              backGroundColor: Colors.green,
+                            )
+                            : SizedBox(),
+                  ),
                 ),
               ],
             ),
           ),
           floatingActionButton: FloatingActionCurrentLocationButtonCustomWidget(
+            backGroundColor: MyColor.kBlue,
             onPressed: () {
+              iss = true;
+              setState(() {});
               BlocProvider.of<MapCubit>(context).goToCurrentLocation();
               BlocProvider.of<MapCubit>(
                 context,
-              ).getDirectionAndAllData( end: placeSuggestion.placeId);
-              log('*************${mapPlaceDirectionAndAllData!.startAddress}**********${mapPlaceDirectionAndAllData!.endAddress}');
+              ).getDirectionAndAllData(end: placeSuggestion.placeId);
             },
+            iconData: Icon(Icons.place, color: Colors.white),
           ),
         );
       },

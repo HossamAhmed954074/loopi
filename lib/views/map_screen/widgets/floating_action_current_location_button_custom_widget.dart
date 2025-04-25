@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../constants/colors_constants.dart';
 
 class FloatingActionCurrentLocationButtonCustomWidget extends StatelessWidget {
-  const FloatingActionCurrentLocationButtonCustomWidget({super.key, required this.onPressed});
+  const FloatingActionCurrentLocationButtonCustomWidget({super.key, required this.onPressed, required this.iconData, required this.backGroundColor});
   final Function() onPressed;
+ final Icon iconData;
+ final  Color backGroundColor;
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -13,8 +15,8 @@ class FloatingActionCurrentLocationButtonCustomWidget extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(0, 0, 8, 30),
       child: FloatingActionButton(
         onPressed: onPressed,
-        backgroundColor: MyColor.kBlue,
-        child: Icon(Icons.place, color: Colors.white),
+        backgroundColor: backGroundColor,
+        child: iconData,
       ),
     );
   }

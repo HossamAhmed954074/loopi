@@ -1,4 +1,4 @@
-import 'package:final_project/views/tiket_screen/widgets/suggest_places_list_custom.dart';
+import 'package:final_project/views/map_screen/widgets/suggest_places_list_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import '../../../models/map_auto_complet/place_sugestion.dart';

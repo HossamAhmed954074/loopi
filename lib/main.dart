@@ -9,12 +9,13 @@ import 'package:final_project/views/login_register_screens/screens/login_screen.
 import 'package:final_project/views/login_register_screens/screens/otp_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/phone_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/register_screen.dart';
+import 'package:final_project/views/map_screen/screens/map_screen.dart';
+import 'package:final_project/views/ticket_screen/screens/tiket_screen.dart';
 import 'package:final_project/views/payment_screen/screens/payment_web_view.dart';
 import 'package:final_project/views/payment_screen/screens/payments_screen.dart';
 import 'package:final_project/views/profile_screen/screens/profile_screen.dart';
 import 'package:final_project/views/splash_screen/splash_screen.dart';
-import 'package:final_project/views/tiket_screen/screens/map_screen.dart';
-import 'package:final_project/views/tiket_screen/screens/tiket_screen.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
