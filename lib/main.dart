@@ -1,6 +1,7 @@
 import 'package:final_project/cubits/botom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:final_project/cubits/login_register_cubit/login_register_cubit.dart';
 import 'package:final_project/cubits/map_cubit/map_cubit.dart';
+import 'package:final_project/cubits/payment_cubit/payment_cubit.dart';
 import 'package:final_project/firebase_options.dart';
 import 'package:final_project/views/get_started_screen/get_started_screen.dart';
 import 'package:final_project/views/home_screen/screens/home_screen.dart';
@@ -8,6 +9,8 @@ import 'package:final_project/views/login_register_screens/screens/login_screen.
 import 'package:final_project/views/login_register_screens/screens/otp_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/phone_screen.dart';
 import 'package:final_project/views/login_register_screens/screens/register_screen.dart';
+import 'package:final_project/views/payment_screen/screens/payment_web_view.dart';
+import 'package:final_project/views/payment_screen/screens/payments_screen.dart';
 import 'package:final_project/views/profile_screen/screens/profile_screen.dart';
 import 'package:final_project/views/splash_screen/splash_screen.dart';
 import 'package:final_project/views/tiket_screen/screens/map_screen.dart';
@@ -46,6 +49,7 @@ class LoopiApp extends StatelessWidget {
         BlocProvider(create: (context) => BottomNavigationBarCubit()),
         BlocProvider(create: (context) => MapCubit()),
         BlocProvider(create: (context) => AppThemeCubit()),
+        BlocProvider(create: (context) => PaymentCubit()),
 
       ],
       child: BlocBuilder<AppThemeCubit, AppThemeState>(
@@ -66,6 +70,8 @@ class LoopiApp extends StatelessWidget {
               phoneScreen: (context) => PhoneScreen(),
               otpScreen: (context) => OtpScreen(),
               mapScreen: (context) => MapScreen(),
+              paymentsScreen: (context) => PaymentsScreen(),
+              paymentRequistBodyScreen: (context) => PaymentRequistBodyScreen(),
             },
             initialRoute: initialRoute,
           );

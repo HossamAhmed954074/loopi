@@ -10,6 +10,7 @@ class TiketScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
             child: ButtonCustom(
@@ -18,6 +19,16 @@ class TiketScreen extends StatelessWidget {
               buttonColor: Colors.grey,
               onTap: () {
                 Navigator.pushNamed(context, mapScreen);
+              },
+            ),
+          ),
+          Center(
+            child: ButtonCustom(
+              textColor: Colors.black,
+              buttonTitle: 'Payment screen',
+              buttonColor: Colors.grey,
+              onTap: () {
+                Navigator.pushNamed(context, paymentsScreen);
               },
             ),
           ),

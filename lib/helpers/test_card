@@ -1,0 +1,23 @@
+This Card always return successful transaction:
+
+Card Number :5123450000000008
+Card holder name : Fawaterak test
+Expiry Date : 12/26
+CSV:100
+
+Card Number :4005 5500 0000 0001
+Card holder name : Fawaterak test
+Expiry Date : 12/26
+CSV:100
+
+This Card always return Failed transaction:
+
+Card Number :5543474002249996
+Card holder name : Fawaterak test
+Expiry Date : 05/21
+CSV:123
+
+Card Number : 5436 0310 3060 6378
+Card holder name : Fawaterak test
+Expiry Date : 12/25
+CSV:123
