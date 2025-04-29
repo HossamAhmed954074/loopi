@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:final_project/apis/payment_api/payment_api.dart';
-import 'package:final_project/constants/routs_constants.dart';
-import 'package:final_project/models/payment_model/payment_model.dart';
-import 'package:final_project/models/payment_model/payment_visa_model.dart';
+import '../../apis/payment_api/payment_api.dart';
+import '../../models/payment_model/payment_model.dart';
+import '../../models/payment_model/payment_visa_model.dart';
 import 'package:meta/meta.dart';
 
 part 'payment_state.dart';

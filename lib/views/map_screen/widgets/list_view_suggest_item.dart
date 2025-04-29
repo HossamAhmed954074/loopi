@@ -57,7 +57,7 @@ class ListViewItem extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: '${subtitle.substring(0)}',
+                      text: subtitle.substring(0),
                       style: TextStyle(fontSize: 14,color: Colors.black),
 
                     ),

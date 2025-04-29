@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors_constants.dart';
 
 class FloatingActionCurrentLocationButtonCustomWidget extends StatelessWidget {
   const FloatingActionCurrentLocationButtonCustomWidget({super.key, required this.onPressed, required this.iconData, required this.backGroundColor});

@@ -1,20 +1,21 @@
-import 'package:final_project/cubits/botom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
-import 'package:final_project/cubits/login_register_cubit/login_register_cubit.dart';
-import 'package:final_project/cubits/map_cubit/map_cubit.dart';
-import 'package:final_project/cubits/payment_cubit/payment_cubit.dart';
-import 'package:final_project/firebase_options.dart';
-import 'package:final_project/views/get_started_screen/get_started_screen.dart';
-import 'package:final_project/views/home_screen/screens/home_screen.dart';
-import 'package:final_project/views/login_register_screens/screens/login_screen.dart';
-import 'package:final_project/views/login_register_screens/screens/otp_screen.dart';
-import 'package:final_project/views/login_register_screens/screens/phone_screen.dart';
-import 'package:final_project/views/login_register_screens/screens/register_screen.dart';
-import 'package:final_project/views/map_screen/screens/map_screen.dart';
-import 'package:final_project/views/ticket_screen/screens/tiket_screen.dart';
-import 'package:final_project/views/payment_screen/screens/payment_web_view.dart';
-import 'package:final_project/views/payment_screen/screens/payments_screen.dart';
-import 'package:final_project/views/profile_screen/screens/profile_screen.dart';
-import 'package:final_project/views/splash_screen/splash_screen.dart';
+import 'cubits/botom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
+import 'cubits/home_cubit/cubit/home_cubit.dart';
+import 'cubits/login_register_cubit/login_register_cubit.dart';
+import 'cubits/map_cubit/map_cubit.dart';
+import 'cubits/payment_cubit/payment_cubit.dart';
+import 'firebase_options.dart';
+import 'views/get_started_screen/get_started_screen.dart';
+import 'views/home_screen/screens/home_screen.dart';
+import 'views/login_register_screens/screens/login_screen.dart';
+import 'views/login_register_screens/screens/otp_screen.dart';
+import 'views/login_register_screens/screens/phone_screen.dart';
+import 'views/login_register_screens/screens/register_screen.dart';
+import 'views/map_screen/screens/map_screen.dart';
+import 'views/ticket_screen/screens/tiket_screen.dart';
+import 'views/payment_screen/screens/payment_web_view.dart';
+import 'views/payment_screen/screens/payments_screen.dart';
+import 'views/profile_screen/screens/profile_screen.dart';
+import 'views/splash_screen/splash_screen.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,6 +26,7 @@ import 'constants/routs_constants.dart';
 import 'cubits/app_theme_color/app_theme_cubit.dart';
 
 late String initialRoute;
+late String authUser;
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +35,11 @@ main() async {
     if (user == null) {
       initialRoute = getStartedScreen;
     } else {
+      if(user.email != null){
+        authUser = user.email!;
+      }else if(user.phoneNumber != null){
+        authUser = user.phoneNumber!;
+      }
       initialRoute = homeScreen;
     }
   });
@@ -51,6 +58,7 @@ class LoopiApp extends StatelessWidget {
         BlocProvider(create: (context) => MapCubit()),
         BlocProvider(create: (context) => AppThemeCubit()),
         BlocProvider(create: (context) => PaymentCubit()),
+        BlocProvider(create: (context) => HomeCubit()),
 
       ],
       child: BlocBuilder<AppThemeCubit, AppThemeState>(

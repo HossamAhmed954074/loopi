@@ -1,6 +1,6 @@
-import 'package:final_project/constants/colors_constants.dart';
-import 'package:final_project/constants/routs_constants.dart';
-import 'package:final_project/views/splash_screen/widgets/splash_view_body.dart';
+import '../../constants/colors_constants.dart';
+import '../../constants/routs_constants.dart';
+import 'widgets/splash_view_body.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,6 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds:3 ) ,() {
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context, getStartedScreen);
     },);
   }

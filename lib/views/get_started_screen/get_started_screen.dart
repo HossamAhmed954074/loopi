@@ -1,6 +1,6 @@
-import 'package:final_project/constants/colors_constants.dart';
-import 'package:final_project/constants/images_constants.dart';
-import 'package:final_project/constants/routs_constants.dart';
+import '../../constants/colors_constants.dart';
+import '../../constants/images_constants.dart';
+import '../../constants/routs_constants.dart';
 import 'package:flutter/material.dart';
 
 class GetStartedScreen extends StatelessWidget {

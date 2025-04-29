@@ -8,9 +8,7 @@ class CircleProgressIndecator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        child: CircularProgressIndicator(color: MyColor.kBlue),
-      ),
+      child: CircularProgressIndicator(color: MyColor.kBlue),
     );
   }
 }

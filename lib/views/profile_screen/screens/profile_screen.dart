@@ -1,6 +1,8 @@
-import 'package:final_project/constants/routs_constants.dart';
-import 'package:final_project/cubits/app_theme_color/app_theme_cubit.dart';
-import 'package:final_project/cubits/login_register_cubit/login_register_cubit.dart';
+
+import '../../../constants/routs_constants.dart';
+import '../../../cubits/app_theme_color/app_theme_cubit.dart';
+import '../../../cubits/login_register_cubit/login_register_cubit.dart';
+import '../../../main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +17,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
       create: (context) => loginRegisterCubit,
       child: Scaffold(
@@ -44,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
                   vertical: 16,
                 ),
                 child: Text(
-                  '${BlocProvider.of<LoginRegisterCubit>(context).getLoggedInUser().phoneNumber}',
+                  authUser,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -112,6 +115,7 @@ class ProfileScreen extends StatelessWidget {
 
                 onTap: () async {
                   await loginRegisterCubit.logOut();
+                  // ignore: use_build_context_synchronously
                   Navigator.pushReplacementNamed(context, getStartedScreen);
                 },
               ),

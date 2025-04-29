@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:final_project/models/payment_model/payment_model.dart';
+import '../../models/payment_model/payment_model.dart';
 import '../../models/payment_model/payment_visa_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;

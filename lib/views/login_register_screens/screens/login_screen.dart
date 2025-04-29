@@ -1,7 +1,7 @@
-import 'package:final_project/constants/colors_constants.dart';
-import 'package:final_project/constants/routs_constants.dart';
-import 'package:final_project/cubits/login_register_cubit/login_register_cubit.dart';
-import 'package:final_project/views/login_register_screens/widgets/snackBarCustom.dart';
+import '../../../constants/colors_constants.dart';
+import '../../../constants/routs_constants.dart';
+import '../../../cubits/login_register_cubit/login_register_cubit.dart';
+import '../widgets/snackBarCustom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -10,6 +10,7 @@ import '../widgets/button_custom_widget.dart';
 import '../widgets/text_button_custom.dart';
 import '../widgets/text_form_field_custom_widget.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 

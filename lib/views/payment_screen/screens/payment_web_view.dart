@@ -1,6 +1,6 @@
-import 'package:final_project/constants/routs_constants.dart';
-import 'package:final_project/cubits/payment_cubit/payment_cubit.dart';
-import 'package:final_project/views/login_register_screens/widgets/snackBarCustom.dart';
+import '../../../constants/routs_constants.dart';
+import '../../../cubits/payment_cubit/payment_cubit.dart';
+import '../../login_register_screens/widgets/snackBarCustom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -9,7 +9,7 @@ import '../widgets/loading_indecator_custom_widget.dart';
 
 class PaymentRequistBodyScreen extends StatelessWidget {
   const PaymentRequistBodyScreen({super.key});
-
+@override
   Widget build(BuildContext context) {
     BlocProvider.of<PaymentCubit>(
       context,

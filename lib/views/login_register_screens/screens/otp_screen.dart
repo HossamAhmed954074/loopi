@@ -1,5 +1,5 @@
-import 'package:final_project/constants/routs_constants.dart';
-import 'package:final_project/cubits/login_register_cubit/login_register_cubit.dart';
+import '../../../constants/routs_constants.dart';
+import '../../../cubits/login_register_cubit/login_register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/button_custom_widget.dart';

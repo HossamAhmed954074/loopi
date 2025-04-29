@@ -1,4 +1,4 @@
-import 'package:final_project/constants/colors_constants.dart';
+import '../../../constants/colors_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/map_place_direction/map_place_direction.dart';

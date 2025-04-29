@@ -5,7 +5,7 @@ import '../../../models/map_auto_complet/place_sugestion.dart';
 import 'list_view_suggest_item.dart';
 
 class ListViewBody extends StatelessWidget {
-   ListViewBody({
+   const ListViewBody({
     super.key,
     required this.places, required this.onTap, required this.controller,
   });

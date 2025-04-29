@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 
-import '../../models/map_place_details/map_place_details.dart';
-
 class PlaceDetailsApiApi {
   Dio dio = Dio();
   String baseUrl = 'https://maps.googleapis.com/maps/api/place/details/json';

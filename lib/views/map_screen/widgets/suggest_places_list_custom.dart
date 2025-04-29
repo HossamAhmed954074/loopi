@@ -1,4 +1,4 @@
-import 'package:final_project/cubits/map_cubit/map_cubit.dart';
+import '../../../cubits/map_cubit/map_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
@@ -19,10 +19,10 @@ class SuggestionPlacesList extends StatelessWidget {
           if (places.isNotEmpty) {
             return ListViewBody(places: places, onTap: onTap, controller: controller,);
           } else {
-            return Container(child: Text('not found '));
+            return Text('not found ');
           }
         } else {
-          return Container(child: Text('not found '));
+          return Text('not found ');
         }
       },
     );

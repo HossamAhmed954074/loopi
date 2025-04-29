@@ -1,8 +1,7 @@
-import 'dart:developer';
-import 'package:final_project/constants/routs_constants.dart';
-import 'package:final_project/cubits/map_cubit/map_cubit.dart';
-import 'package:final_project/models/map_auto_complet/place_sugestion.dart';
-import 'package:final_project/views/payment_screen/widgets/loading_indecator_custom_widget.dart';
+import '../../../constants/routs_constants.dart';
+import '../../../cubits/map_cubit/map_cubit.dart';
+import '../../../models/map_auto_complet/place_sugestion.dart';
+import '../../payment_screen/widgets/loading_indecator_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,7 +15,7 @@ import '../widgets/floating_search_bar_custom.dart';
 import '../widgets/map_body.dart';
 
 class MapScreen extends StatefulWidget {
-  MapScreen({super.key});
+  const MapScreen({super.key});
 
   @override
   State<MapScreen> createState() => MapScreenState();
