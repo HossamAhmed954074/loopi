@@ -18,28 +18,38 @@ class HomeBody extends StatelessWidget {
             padding: const EdgeInsets.only(top: 40, right: 8),
             child: Column(
               children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: AppBarCustomWidget(),
-                ),
+                SizedBox(width: double.infinity, child: AppBarCustomWidget()),
                 if (state is HomeLoaded)
-                  Expanded(child: Center(child:LoadingIndecatorCustomWidget())),
+                  Expanded(
+                    child: Center(child: LoadingIndecatorCustomWidget()),
+                  ),
+                if (state is HomeInitial)
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        'No Tickets Found',
+                        style: TextStyle(color: Colors.red, fontSize: 20),
+                      ),
+                    ),
+                  ),
                 if (state is Homesucess)
                   Expanded(
                     flex: 9,
                     child: ListView.builder(
                       itemCount: state.ticketModel.length,
                       itemBuilder: (context, index) {
-                        return TicketsCustomWidget(ticketsModel: state.ticketModel[index],);
+                        return TicketsCustomWidget(
+                          ticketsModel: state.ticketModel[index],
+                        );
                       },
                     ),
                   ),
-                 if(state is HomeFaluire)
+                if (state is HomeFaluire)
                   Expanded(
                     flex: 9,
                     child: Center(
                       child: Text(
-                        state.errorMessage,
+                        'No Data Found',
                         style: TextStyle(color: Colors.red, fontSize: 20),
                       ),
                     ),
@@ -78,11 +88,11 @@ class AppBarCustomWidget extends StatelessWidget {
 
 class TicketsCustomWidget extends StatelessWidget {
   const TicketsCustomWidget({super.key, required this.ticketsModel});
-final  TicketsModel ticketsModel;
+  final TicketsModel ticketsModel;
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: ticketsModel.isArrived ? Colors.green[100] :Colors.yellow[100],
+      color: ticketsModel.isArrived ? Colors.green[100] : Colors.yellow[100],
       elevation: 4,
       margin: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: Padding(
@@ -110,12 +120,17 @@ final  TicketsModel ticketsModel;
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(ticketsModel.startLocation, style: TextStyle(fontSize: 14)),
+                Text(
+                  ticketsModel.startLocation,
+                  style: TextStyle(fontSize: 14),
+                ),
                 Text('50 MIN', style: TextStyle(fontSize: 14)),
               ],
             ),
             SizedBox(height: 8),
-            Text('d ${ticketsModel.dateTime.toDate().day}/ m ${ticketsModel.dateTime.toDate().month}  ** ${ticketsModel.dateTime.toDate().hour} : ${ticketsModel.dateTime.toDate().minute} AM backaup'),
+            Text(
+              'd ${ticketsModel.dateTime.toDate().day}/ m ${ticketsModel.dateTime.toDate().month}  ** ${ticketsModel.dateTime.toDate().hour} : ${ticketsModel.dateTime.toDate().minute} AM backaup',
+            ),
             Text('9:45 AM Arrived'),
           ],
         ),

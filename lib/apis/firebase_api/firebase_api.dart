@@ -13,7 +13,6 @@ class FireBaseApi {
   }
 
   postData() async {
-
     await _instance.collection('users').doc(authUser).collection('tikets').add({
       'startPoint': GeoPoint(1.0, 2.0),
       'endPoint': GeoPoint(3.0, 4.0),
@@ -26,7 +25,9 @@ class FireBaseApi {
 
   }
 
-  deleteData() {}
+  deleteData(String tiketId) async{
+    await _instance.collection('users').doc(authUser).collection('tikets').doc(tiketId).delete();
+  }
 }
 
 

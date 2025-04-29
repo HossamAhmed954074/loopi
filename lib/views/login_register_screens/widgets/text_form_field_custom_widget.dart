@@ -21,7 +21,6 @@ class TextFormFieldCustom extends StatelessWidget {
           ),
           label: Text(labelTitle),
         ),
-
       ),
     );
   }

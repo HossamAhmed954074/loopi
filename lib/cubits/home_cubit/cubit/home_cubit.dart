@@ -12,12 +12,16 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoaded());
     try {
       List<TicketsModel> userData = [];
-      var data = FireBaseApi().getAllData();      
+      var data = FireBaseApi().getAllData();
       var list = await data;
-      for (int i = 0; i < list.docs.length; i++) {
-        userData.add(TicketsModel.fromSnapShot(list.docs[i].data()));
+      if (list.docs.isEmpty) {
+        emit(HomeInitial());
+      } else {
+        for (int i = 0; i < list.docs.length; i++) {
+          userData.add(TicketsModel.fromSnapShot(list.docs[i].data()));
+        }
+        emit(Homesucess(ticketModel: userData));
       }
-      emit(Homesucess(ticketModel: userData));
     } catch (e) {
       emit(HomeFaluire(errorMessage: e.toString()));
     }
