@@ -9,6 +9,7 @@ class TextFormFieldCustom extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16),
       child: TextFormField(
+        // ignore: body_might_complete_normally_nullable
         validator: (value) {
           if(value!.isEmpty){
             return 'field is required';
