@@ -1,9 +1,10 @@
+import 'package:final_project/views/home_screen/widgets/app_bar_custom_widget.dart';
+import 'package:final_project/views/home_screen/widgets/ticket_item_custom_widget.dart';
 import '../../../cubits/home_cubit/cubit/home_cubit.dart';
-import '../../../main.dart';
-import '../../../models/ticket_model/ticket_model.dart';
 import '../../payment_screen/widgets/loading_indecator_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -49,7 +50,7 @@ class HomeBody extends StatelessWidget {
                     flex: 9,
                     child: Center(
                       child: Text(
-                        'No Data Found',
+                        'Have Error Please Try again Later! ',
                         style: TextStyle(color: Colors.red, fontSize: 20),
                       ),
                     ),
@@ -59,82 +60,6 @@ class HomeBody extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class AppBarCustomWidget extends StatelessWidget {
-  const AppBarCustomWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.blue[100],
-      child: ListTile(
-        leading: Image.asset('assets/images/icon.png'),
-        title: Text(
-          authUser,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text('All Tikets ', style: TextStyle(fontSize: 16)),
-        trailing: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.notifications_active_outlined),
-        ),
-      ),
-    );
-  }
-}
-
-class TicketsCustomWidget extends StatelessWidget {
-  const TicketsCustomWidget({super.key, required this.ticketsModel});
-  final TicketsModel ticketsModel;
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: ticketsModel.isArrived ? Colors.green[100] : Colors.yellow[100],
-      elevation: 4,
-      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  ticketsModel.endLocation,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  '${ticketsModel.price} EGP',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orangeAccent,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  ticketsModel.startLocation,
-                  style: TextStyle(fontSize: 14),
-                ),
-                Text('50 MIN', style: TextStyle(fontSize: 14)),
-              ],
-            ),
-            SizedBox(height: 8),
-            Text(
-              'd ${ticketsModel.dateTime.toDate().day}/ m ${ticketsModel.dateTime.toDate().month}  ** ${ticketsModel.dateTime.toDate().hour} : ${ticketsModel.dateTime.toDate().minute} AM backaup',
-            ),
-            Text('9:45 AM Arrived'),
-          ],
-        ),
-      ),
     );
   }
 }

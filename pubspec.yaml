@@ -53,6 +53,7 @@ dependencies:
   cloud_firestore: ^5.6.6
   meta: ^1.16.0
   bloc: ^9.0.0
+  flutter_swipe_action_cell: ^3.1.5
 
 dev_dependencies:
   firebase_core_platform_interface: 5.4.0

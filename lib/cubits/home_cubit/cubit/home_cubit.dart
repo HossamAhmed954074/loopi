@@ -1,3 +1,4 @@
+
 import 'package:bloc/bloc.dart';
 import '../../../apis/firebase_api/firebase_api.dart';
 import '../../../models/ticket_model/ticket_model.dart';
@@ -13,12 +14,14 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       List<TicketsModel> userData = [];
       var data = FireBaseApi().getAllData();
+
       var list = await data;
+      
       if (list.docs.isEmpty) {
         emit(HomeInitial());
       } else {
         for (int i = 0; i < list.docs.length; i++) {
-          userData.add(TicketsModel.fromSnapShot(list.docs[i].data()));
+          userData.add(TicketsModel.fromSnapShot(list.docs[i].data(), list.docs[i].id));
         }
         emit(Homesucess(ticketModel: userData));
       }
@@ -26,4 +29,16 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeFaluire(errorMessage: e.toString()));
     }
   }
+
+  deleteData(String tiketId) async {
+    emit(HomeLoaded());
+    try {
+      await FireBaseApi().deleteData(tiketId);
+      getData();
+    } catch (e) {
+      emit(HomeFaluire(errorMessage: e.toString()));
+    }
+  }
+
+
 }

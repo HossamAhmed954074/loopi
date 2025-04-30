@@ -1,14 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../main.dart';
 
 class FireBaseApi {
   final _instance = FirebaseFirestore.instance;
 
   Future getAllData() async {
+    
     return _instance
         .collection('users')
         .doc(authUser)
-        .collection('tikets').orderBy('dateTime', descending: false)
+        .collection('tikets')
+        .orderBy('dateTime', descending: false)
         .get();
   }
 
@@ -22,24 +25,14 @@ class FireBaseApi {
       'price': 100,
       'isArrived': false,
     });
-
   }
 
-  deleteData(String tiketId) async{
-    await _instance.collection('users').doc(authUser).collection('tikets').doc(tiketId).delete();
+  deleteData(String tiketId) async {
+    await _instance
+        .collection('users')
+        .doc(authUser)
+        .collection('tikets')
+        .doc(tiketId)
+        .delete();
   }
 }
-
-
-
-
-
-// .listen((event) {
-//        var list = event.docs;
-//        List<TicketsModel> userData = [];
-//        for(int i=0 ; i< list.length;i++){
-//          userData.add(TicketsModel.fromSnapShot(list[i].data()));
-//        }
-//        userData1.addAll(userData);
-//     },);
-//    log(userData1[0].startLocation);
