@@ -7,14 +7,15 @@ class AppBarCustomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.only(bottom: 8),
       color: Colors.blue[100],
       child: ListTile(
         leading: Image.asset('assets/images/icon.png'),
         title: Text(
           authUser,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
-        subtitle: Text(title, style: TextStyle(fontSize: 16)),
+        subtitle: Text(title, style: TextStyle(fontSize: 14)),
         trailing: IconButton(
           onPressed: () {},
           icon: Icon(Icons.notifications_active_outlined),

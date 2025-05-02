@@ -12,7 +12,7 @@ class TicketsCustomWidget extends StatelessWidget {
     return Card(
       // color: ticketsModel.isArrived ? Colors.green[100] : Colors.yellow[100],
       elevation: 4,
-      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
       child: SwipeActionCell(
         key: ValueKey(ticketsModel.id),
         trailingActions: [

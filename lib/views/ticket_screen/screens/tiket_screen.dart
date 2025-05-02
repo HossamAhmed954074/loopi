@@ -58,7 +58,9 @@ class TiketScreen extends StatelessWidget {
                             flex: 1,
                             child: InkWell(
                               child: Image.asset('assets/images/map.png'),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushReplacementNamed(context, mapScreen);
+                              },
                             ),
                           ),
                           Expanded(
@@ -123,9 +125,10 @@ class TiketScreen extends StatelessWidget {
                     buttonColor: MyColor.kButtonLoginColor,
                     onTap: () {
                       FireBaseApi().postData();
-                      BlocProvider.of<BottomNavigationBarCubit>(
-                        context,
-                      ).changeItem(0);
+                      Navigator.pushReplacementNamed(context, homeScreen);
+                      // BlocProvider.of<BottomNavigationBarCubit>(
+                      //   context,
+                      // ).changeItem(0);
                     },
                   ),
                 ),

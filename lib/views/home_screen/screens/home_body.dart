@@ -1,5 +1,8 @@
+import 'package:final_project/constants/colors_constants.dart';
+import 'package:final_project/constants/routs_constants.dart';
 import 'package:final_project/views/home_screen/widgets/app_bar_custom_widget.dart';
 import 'package:final_project/views/home_screen/widgets/ticket_item_custom_widget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../cubits/home_cubit/cubit/home_cubit.dart';
 import '../../payment_screen/widgets/loading_indecator_custom_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +18,7 @@ class HomeBody extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           body: Padding(
-            padding: const EdgeInsets.only(top: 40, right: 8),
+            padding: const EdgeInsets.only(top: 40, right: 8,left: 8,bottom: 8),
             child: Column(
               children: [
                 SizedBox(width: double.infinity, child: AppBarCustomWidget(title: 'All Tikets',)),
@@ -57,6 +60,12 @@ class HomeBody extends StatelessWidget {
               ],
             ),
           ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.amberAccent,
+
+            onPressed: (){
+              Navigator.pushNamed(context, tiketScreen);
+          },child: Icon(FontAwesomeIcons.ticket),),
         );
       },
     );

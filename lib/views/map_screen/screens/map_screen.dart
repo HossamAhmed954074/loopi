@@ -76,6 +76,7 @@ class MapScreenState extends State<MapScreen> {
                     ).getAllSuggestionPlace(val);
                   },
                   onFocusChanged: (isBool) {
+                    controller.clear;
                     setState(() {
                       iss = false;
                       markers.clear();
@@ -98,12 +99,14 @@ class MapScreenState extends State<MapScreen> {
                     child:
                         iss
                             ? FloatingActionCurrentLocationButtonCustomWidget(
+                              heroTag: 'but1',
                               onPressed: () {
                                 Navigator.pushReplacementNamed(
                                   context,
                                   tiketScreen,
                                   arguments: mapPlaceDirectionAndAllData,
                                 );
+                                controller.clear();
                               },
                               iconData: Icon(
                                 FontAwesomeIcons.check,
@@ -118,6 +121,8 @@ class MapScreenState extends State<MapScreen> {
             ),
           ),
           floatingActionButton: FloatingActionCurrentLocationButtonCustomWidget(
+            heroTag: 'but2',
+            
             backGroundColor: MyColor.kBlue,
             onPressed: () {
               iss = true;

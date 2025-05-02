@@ -10,8 +10,6 @@ class BottomNavigationBarCubit extends Cubit<BottomNavigationBarState> {
    if(value == 0){
      emit(BottomNavigationBarHome());
    }else if(value == 1){
-     emit(BottomNavigationBarTiket());
-   }else if(value == 2){
      emit(BottomNavigationBarProfile());
    }
  }

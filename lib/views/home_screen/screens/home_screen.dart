@@ -3,8 +3,7 @@ import 'home_body.dart';
 import '../../profile_screen/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../ticket_screen/screens/tiket_screen.dart';
+
 
 class HomeScreen extends StatelessWidget {
  const HomeScreen({super.key});
@@ -18,10 +17,6 @@ class HomeScreen extends StatelessWidget {
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
-                icon: Icon(FontAwesomeIcons.ticket),
-                label: 'Ticket',
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
               ),
@@ -29,9 +24,7 @@ class HomeScreen extends StatelessWidget {
             currentIndex:
                 state is BottomNavigationBarHome
                     ? 0
-                    : state is BottomNavigationBarTiket
-                    ? 1
-                    : 2,
+                    : 1,
             selectedItemColor: Colors.teal,
             unselectedItemColor: Colors.grey,
             onTap:
@@ -42,8 +35,7 @@ class HomeScreen extends StatelessWidget {
           body:
               state is BottomNavigationBarHome
                   ? HomeBody()
-                  : state is BottomNavigationBarTiket
-                  ? TiketScreen()
+                  
                   : ProfileScreen(),
         );
       },
