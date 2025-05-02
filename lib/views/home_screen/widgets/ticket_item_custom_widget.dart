@@ -10,7 +10,7 @@ class TicketsCustomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-     // color: ticketsModel.isArrived ? Colors.green[100] : Colors.yellow[100],
+      // color: ticketsModel.isArrived ? Colors.green[100] : Colors.yellow[100],
       elevation: 4,
       margin: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: SwipeActionCell(
@@ -18,11 +18,12 @@ class TicketsCustomWidget extends StatelessWidget {
         trailingActions: [
           SwipeAction(
             widthSpace: 60,
-             performsFirstActionWithFullSwipe: true,
+            performsFirstActionWithFullSwipe: true,
             title: 'Delete',
             onTap: (controller) async {
-              await BlocProvider.of<HomeCubit>(context)
-                  .deleteData(ticketsModel.id!);
+              await BlocProvider.of<HomeCubit>(
+                context,
+              ).deleteData(ticketsModel.id!);
             },
             color: Colors.red,
           ),
@@ -60,10 +61,27 @@ class TicketsCustomWidget extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 8),
-              Text(
-                'd ${ticketsModel.dateTime.toDate().day}/ m ${ticketsModel.dateTime.toDate().month}  ** ${ticketsModel.dateTime.toDate().hour} : ${ticketsModel.dateTime.toDate().minute} AM backaup',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${ticketsModel.dateTime.toDate().day} / ${ticketsModel.dateTime.toDate().month} ',
+                  ),
+                  Text(
+                    '${ticketsModel.dateTime.toDate().hour} : ${ticketsModel.dateTime.toDate().minute} AM backaup',
+                  ),
+                ],
               ),
-              Text('9:45 AM Arrived'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('9:45 AM Arrived'),
+                  if (!ticketsModel.isArrived)
+                    Text('Waiting', style: TextStyle(color: Colors.red)),
+                  if (ticketsModel.isArrived)
+                    Text('Arrived', style: TextStyle(color: Colors.green)),
+                ],
+              ),
             ],
           ),
         ),

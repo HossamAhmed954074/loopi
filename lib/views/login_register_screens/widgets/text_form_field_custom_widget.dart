@@ -9,6 +9,7 @@ class TextFormFieldCustom extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16),
       child: TextFormField(
+        cursorColor: Colors.black,
         // ignore: body_might_complete_normally_nullable
         validator: (value) {
           if(value!.isEmpty){
@@ -16,8 +17,11 @@ class TextFormFieldCustom extends StatelessWidget {
           }
         },
         onChanged: onChanged,
-        decoration: InputDecoration(
+        decoration: InputDecoration(   
           border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.black
+            ),
             borderRadius: BorderRadius.circular(16),
           ),
           label: Text(labelTitle),

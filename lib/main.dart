@@ -1,3 +1,5 @@
+import 'package:final_project/cubits/ticket_cubit/cubit/ticket_cubit.dart';
+
 import 'cubits/botom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'cubits/home_cubit/cubit/home_cubit.dart';
 import 'cubits/login_register_cubit/login_register_cubit.dart';
@@ -59,6 +61,7 @@ class LoopiApp extends StatelessWidget {
         BlocProvider(create: (context) => AppThemeCubit()),
         BlocProvider(create: (context) => PaymentCubit()),
         BlocProvider(create: (context) => HomeCubit()),
+        BlocProvider(create: (context) => TicketCubit()),
 
       ],
       child: BlocBuilder<AppThemeCubit, AppThemeState>(

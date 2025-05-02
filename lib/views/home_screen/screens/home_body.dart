@@ -18,7 +18,7 @@ class HomeBody extends StatelessWidget {
             padding: const EdgeInsets.only(top: 40, right: 8),
             child: Column(
               children: [
-                SizedBox(width: double.infinity, child: AppBarCustomWidget()),
+                SizedBox(width: double.infinity, child: AppBarCustomWidget(title: 'All Tikets',)),
                 if (state is HomeLoaded)
                   Expanded(
                     child: Center(child: LoadingIndecatorCustomWidget()),
