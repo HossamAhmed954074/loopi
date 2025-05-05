@@ -45,12 +45,13 @@ class PaymentRequistBodyScreen extends StatelessWidget {
                       onNavigationRequest: (NavigationRequest request) {
                         if (request.url.contains('success')) {
                           snackBarCustom(context, 'payment Success');
-                          Navigator.pushReplacementNamed(context, tiketScreen);
+                          Navigator.pushReplacementNamed(context, tiketScreen,arguments: true);
                         } else if (request.url.contains('fail')) {
                           snackBarCustom(context, 'Faild Payment Try again !');
                           Navigator.pushReplacementNamed(
                             context,
-                            paymentsScreen,
+                            tiketScreen,
+                            arguments: false,
                           );
                         }
                         return NavigationDecision.navigate;
@@ -66,7 +67,7 @@ class PaymentRequistBodyScreen extends StatelessWidget {
           } else if (state is PaymentRequistLoading) {
             return LoadingIndecatorCustomWidget();
           } else {
-            return Center(child: Text('Have Erroe'));
+            return Center(child: Text('Have Error'));
           }
         },
       ),

@@ -1,19 +1,48 @@
+import 'dart:developer';
+
 import 'package:final_project/constants/colors_constants.dart';
 import 'package:final_project/constants/routs_constants.dart';
 import 'package:final_project/cubits/ticket_cubit/cubit/ticket_cubit.dart';
+import 'package:final_project/models/map_place_direction/map_place_direction.dart';
 import 'package:final_project/views/ticket_screen/widgets/date_time_custom_widget.dart';
 import 'package:final_project/views/ticket_screen/widgets/location_form_field_custom_widget.dart';
 import '../../../apis/firebase_api/firebase_api.dart';
-import '../../../cubits/botom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../login_register_screens/widgets/button_custom_widget.dart';
 
-class TiketScreen extends StatelessWidget {
-  const TiketScreen({super.key});
+// ignore: must_be_immutable
+class TiketScreen extends StatefulWidget {
+  TiketScreen({super.key});
+
+  @override
+  State<TiketScreen> createState() => _TiketScreenState();
+}
+
+class _TiketScreenState extends State<TiketScreen> {
+  MapPlaceDirectionAndAllData? mapData;
+
+   bool isCash = false;
 
   @override
   Widget build(BuildContext context) {
+    var paymentCheeck = ModalRoute.of(context)!.settings.arguments ?? false;
+    log(paymentCheeck.toString());
+    var mapPlaceDirectionAndAllData =
+        ModalRoute.of(context)!.settings.arguments;
+    if (mapPlaceDirectionAndAllData is MapPlaceDirectionAndAllData) {
+      mapData = mapPlaceDirectionAndAllData;
+      log(
+        mapPlaceDirectionAndAllData.startAddress.substring(
+          0,
+          mapPlaceDirectionAndAllData.startAddress.indexOf(','),
+        ),
+      );
+      log(mapPlaceDirectionAndAllData.endAddress);
+      log(mapPlaceDirectionAndAllData.totalDistance);
+      log(mapPlaceDirectionAndAllData.totalDuration);
+    }
+
     return BlocBuilder<TicketCubit, TicketState>(
       builder: (context, state) {
         return Scaffold(
@@ -59,7 +88,7 @@ class TiketScreen extends StatelessWidget {
                             child: InkWell(
                               child: Image.asset('assets/images/map.png'),
                               onTap: () {
-                                Navigator.pushReplacementNamed(context, mapScreen);
+                                Navigator.pushNamed(context, mapScreen);
                               },
                             ),
                           ),
@@ -73,6 +102,27 @@ class TiketScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 10),
+                      if (mapPlaceDirectionAndAllData
+                              is MapPlaceDirectionAndAllData)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              'Distance : ${mapPlaceDirectionAndAllData.totalDistance}',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              ' Time : ${mapPlaceDirectionAndAllData.totalDuration}',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       DateTimeCustomWidget(
                         onConfirm: (date) {
                           BlocProvider.of<TicketCubit>(
@@ -97,8 +147,13 @@ class TiketScreen extends StatelessWidget {
                         child: ButtonCustom(
                           textColor: Colors.black,
                           buttonTitle: 'Cash',
-                          buttonColor: Colors.grey,
-                          onTap: () {},
+                          buttonColor: isCash == false ? Colors.grey : Colors.green,
+                          onTap: () {
+                            setState(() {
+                              isCash = !isCash;
+                            });
+
+                          },
                         ),
                       ),
                     ),
@@ -108,7 +163,7 @@ class TiketScreen extends StatelessWidget {
                         child: ButtonCustom(
                           textColor: Colors.black,
                           buttonTitle: 'Payment Online',
-                          buttonColor: Colors.grey,
+                          buttonColor: paymentCheeck == false ? Colors.grey : Colors.green,
                           onTap: () {
                             Navigator.pushNamed(context, paymentsScreen);
                           },

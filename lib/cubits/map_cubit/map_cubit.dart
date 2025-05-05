@@ -18,7 +18,7 @@ part 'map_state.dart';
 
 class MapCubit extends Cubit<MapState> {
   MapCubit() : super(MapInitial()) {
-    getCurrentLocation();
+    
   }
 
   Marker? markerMe;
@@ -88,7 +88,7 @@ class MapCubit extends Cubit<MapState> {
       // return Future.error(
       //   'Location permissions are permanently denied, we cannot request permissions.',
       // );
-    }
+    }  
 
     return await Geolocator.getCurrentPosition();
   }

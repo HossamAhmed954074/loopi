@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../../constants/routs_constants.dart';
 import '../../../cubits/map_cubit/map_cubit.dart';
 import '../../../models/map_auto_complet/place_sugestion.dart';
@@ -23,11 +25,17 @@ class MapScreen extends StatefulWidget {
 
 class MapScreenState extends State<MapScreen> {
   Set<Marker> markers = Set();
-  late PlaceSuggestion placeSuggestion;
+ PlaceSuggestion? placeSuggestion;
   final FloatingSearchBarController controller = FloatingSearchBarController();
   bool iss = false;
-
+  Completer<GoogleMapController> mapController = Completer();
   MapPlaceDirectionAndAllData? mapPlaceDirectionAndAllData;
+
+  @override
+  void initState() {
+   BlocProvider.of<MapCubit>(context).getCurrentLocation();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +71,8 @@ class MapScreenState extends State<MapScreen> {
                           BlocProvider.of<MapCubit>(
                             context,
                           ).myCurrentLocationCamiraPosition!,
-                      controller:
-                          (c) => BlocProvider.of<MapCubit>(
-                            context,
-                          ).mapController.complete(c),
+                      controller: (c) => mapController.complete(c),
+                          
                     ),
                 BuildFloatingSearchBar(
                   controller: controller,
@@ -130,7 +136,7 @@ class MapScreenState extends State<MapScreen> {
               BlocProvider.of<MapCubit>(context).goToCurrentLocation();
               BlocProvider.of<MapCubit>(
                 context,
-              ).getDirectionAndAllData(end: placeSuggestion.placeId);
+              ).getDirectionAndAllData(end: placeSuggestion!.placeId);
             },
             iconData: Icon(Icons.place, color: Colors.white),
           ),

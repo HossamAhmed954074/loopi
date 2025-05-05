@@ -1,4 +1,3 @@
-import 'package:final_project/constants/colors_constants.dart';
 import 'package:final_project/constants/routs_constants.dart';
 import 'package:final_project/views/home_screen/widgets/app_bar_custom_widget.dart';
 import 'package:final_project/views/home_screen/widgets/ticket_item_custom_widget.dart';
