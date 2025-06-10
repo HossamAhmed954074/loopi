@@ -38,6 +38,7 @@ migrate_working_dir/
 /ios/Runner/GoogleService-Info.plist
 # Secrets file
 /lib/secrets/secrets.dart
+/lib/firebase_options.dart
 
 # Symbolication related
 app.*.symbols
