@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:final_project/secrets/secrets.dart';
 
 import '../../models/map_auto_complet/place_sugestion.dart';
 
@@ -7,7 +8,7 @@ class PlaceSuggestionApi {
   Dio dio = Dio();
   String baseUrl =
       'https://maps.googleapis.com/maps/api/place/autocomplete/json';
-  String apiKey = 'AIzaSyDFEC6jg_AQfCavA6DrMEo1Wvbm1D8OQfs';
+ 
 
   Future<List<PlaceSuggestion>> fetchSuggestion(
     String place,
@@ -21,7 +22,7 @@ class PlaceSuggestionApi {
           'type': 'university',
           'components': 'country:eg',
           'sessiontoken': sessionTaken,
-          'key': apiKey,
+          'key': Secrets.mapsApiKey,
         },
       );
       List data = response.data['predictions'];

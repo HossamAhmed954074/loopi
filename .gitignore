@@ -32,6 +32,12 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+.flutter-plugins-dependencies
+# Firebase
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
+# Secrets file
+/lib/secrets/secrets.dart
 
 # Symbolication related
 app.*.symbols

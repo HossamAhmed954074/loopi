@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:final_project/secrets/secrets.dart';
 import '../../models/payment_model/payment_model.dart';
 import '../../models/payment_model/payment_visa_model.dart';
 import 'dart:convert';
@@ -8,13 +9,12 @@ class PaymentApi {
   late Dio dio;
   String? apiUrl = 'https://staging.fawaterk.com/api/v2/getPaymentmethods';
   String? apiUrlPost = 'https://staging.fawaterk.com/api/v2/invoiceInitPay';
-  String? accessToken = 'd83a5d07aaeb8442dcbe259e6dae80a3f2e21a3a581e1a5acd';
 
   PaymentApi() {
     var opthins = BaseOptions(
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $accessToken',
+        'Authorization': 'Bearer ${Secrets.paymentAccessToken}',
       },
     );
     dio = Dio(opthins);
@@ -34,7 +34,7 @@ class PaymentApi {
 
   Future<PaymentVisaModel> processPaymentRequest() async {
     final apiUrl = 'https://staging.fawaterk.com/api/v2/invoiceInitPay';
-    final apiToken = 'd83a5d07aaeb8442dcbe259e6dae80a3f2e21a3a581e1a5acd';
+   
     final paymentId = 2; // 2=Visa-MasterCard, 3=Fawry, 4=Meeza
 
     final requestData = {
@@ -62,7 +62,7 @@ class PaymentApi {
       ],
     };
     final headers = {
-      'Authorization': 'Bearer $apiToken',
+      'Authorization': 'Bearer ${Secrets.paymentAccessToken}',
       'Content-Type': 'application/json',
     };
     try {
