@@ -9,7 +9,7 @@ import '../widgets/snackBarCustom.dart';
 import '../widgets/text_button_custom.dart';
 
 class OtpScreen extends StatelessWidget {
-  OtpScreen({super.key});
+  const OtpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

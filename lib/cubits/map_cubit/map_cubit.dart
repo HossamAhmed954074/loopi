@@ -17,9 +17,7 @@ import '../../models/map_place_direction/map_place_direction.dart';
 part 'map_state.dart';
 
 class MapCubit extends Cubit<MapState> {
-  MapCubit() : super(MapInitial()) {
-    
-  }
+  MapCubit() : super(MapInitial());
 
   Marker? markerMe;
   Marker? markerlo;
@@ -46,8 +44,8 @@ class MapCubit extends Cubit<MapState> {
   }
 
   Future<void> goToCurrentLocation() async {
-    final GoogleMapController _controller = await mapController.future;
-    _controller.animateCamera(
+    final GoogleMapController controller = await mapController.future;
+    controller.animateCamera(
       CameraUpdate.newCameraPosition(myCurrentLocationCamiraPosition!),
     );
     markerMe = Marker(

@@ -7,7 +7,7 @@ class TextFormFieldCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 8),
       child: TextFormField(
         cursorColor: Colors.black,
         // ignore: body_might_complete_normally_nullable

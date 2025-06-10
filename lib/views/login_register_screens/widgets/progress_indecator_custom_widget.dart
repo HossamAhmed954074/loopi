@@ -11,7 +11,7 @@ void showProgressIndecator(BuildContext context) {
     ),
   );
   showDialog(
-    barrierColor: Colors.white.withOpacity(0),
+    barrierColor: Colors.white.withAlpha(0),
     barrierDismissible: false,
     context: context,
     builder: (context) => alertDialog,

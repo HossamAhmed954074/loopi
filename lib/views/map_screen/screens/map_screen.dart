@@ -24,7 +24,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class MapScreenState extends State<MapScreen> {
-  Set<Marker> markers = Set();
+  Set<Marker> markers = {};
  PlaceSuggestion? placeSuggestion;
   final FloatingSearchBarController controller = FloatingSearchBarController();
   bool iss = false;

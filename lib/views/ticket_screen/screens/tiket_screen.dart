@@ -13,7 +13,7 @@ import '../../login_register_screens/widgets/button_custom_widget.dart';
 
 // ignore: must_be_immutable
 class TiketScreen extends StatefulWidget {
-  TiketScreen({super.key});
+  const TiketScreen({super.key});
 
   @override
   State<TiketScreen> createState() => _TiketScreenState();

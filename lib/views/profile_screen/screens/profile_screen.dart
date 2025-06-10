@@ -17,7 +17,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
       create: (context) => loginRegisterCubit,
       child: Scaffold(
@@ -67,9 +66,12 @@ class ProfileScreen extends StatelessWidget {
                 leadingIcon: Icons.dark_mode_outlined,
                 title: 'Dark Mode',
                 trailing: CupertinoSwitch(
-                  value: BlocProvider.of<AppThemeCubit>(context).isTheme,
+                  value: BlocProvider
+                      .of<AppThemeCubit>(context)
+                      .isTheme,
                   onChanged:
-                      (val) => BlocProvider.of<AppThemeCubit>(
+                      (val) =>
+                      BlocProvider.of<AppThemeCubit>(
                         context,
                       ).changeTheme(val),
                 ),
@@ -99,11 +101,12 @@ class ProfileScreen extends StatelessWidget {
               DividerCustomWidget(),
               const SizedBox(height: 10),
               ListItemButton(
-                leadingIcon: Icons.help,
-                title: 'Help',
+                leadingIcon: Icons.message,
+                title: 'Chat',
                 trailing: Icon(Icons.arrow_forward_ios),
-
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, messageScreen);
+                },
               ),
               const SizedBox(height: 10),
               DividerCustomWidget(),

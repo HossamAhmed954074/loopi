@@ -26,6 +26,17 @@ class FireBaseApi {
       'isArrived': false,
     });
   }
+  postInfoData() async {
+    await _instance.collection('users').doc(authUser).set({
+      'startPoint': GeoPoint(1.0, 2.0),
+      'endPoint': GeoPoint(3.0, 4.0),
+      'dateTime': Timestamp.now(),
+      'startLocation': 'Start Location',
+      'endLocation': 'End Location',
+      'price': 100,
+      'isArrived': false,
+    });
+  }
 
   deleteData(String tiketId) async {
     await _instance

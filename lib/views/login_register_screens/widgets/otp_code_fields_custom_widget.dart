@@ -35,7 +35,7 @@ class BuildPinCodeFields extends StatelessWidget {
       enableActiveFill: true,
       onCompleted: otpCode,
       onChanged: (value) {
-        print(value);
+       
 
       },
     );

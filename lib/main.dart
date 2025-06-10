@@ -1,4 +1,6 @@
+import 'package:final_project/cubits/message_cubit/chat_cubit.dart';
 import 'package:final_project/cubits/ticket_cubit/cubit/ticket_cubit.dart';
+import 'package:final_project/views/message_screen/screens/message_screen.dart';
 
 import 'cubits/botom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'cubits/home_cubit/cubit/home_cubit.dart';
@@ -19,7 +21,6 @@ import 'views/payment_screen/screens/payments_screen.dart';
 import 'views/profile_screen/screens/profile_screen.dart';
 import 'views/splash_screen/splash_screen.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,18 +34,6 @@ late String authUser;
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FirebaseAuth.instance.authStateChanges().listen((user) {
-    if (user == null) {
-      initialRoute = getStartedScreen;
-    } else {
-      if(user.email != null){
-        authUser = user.email!;
-      }else if(user.phoneNumber != null){
-        authUser = user.phoneNumber!;
-      }
-      initialRoute = homeScreen;
-    }
-  });
   runApp(const LoopiApp());
 }
 
@@ -62,14 +51,14 @@ class LoopiApp extends StatelessWidget {
         BlocProvider(create: (context) => PaymentCubit()),
         BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(create: (context) => TicketCubit()),
-
       ],
       child: BlocBuilder<AppThemeCubit, AppThemeState>(
         builder: (context, state) {
           return MaterialApp(
-            theme: BlocProvider
-                .of<AppThemeCubit>(context)
-                .isTheme ? ThemeData.dark() : ThemeData.light(),
+            theme:
+                BlocProvider.of<AppThemeCubit>(context).isTheme
+                    ? ThemeData.dark()
+                    : ThemeData.light(),
             debugShowCheckedModeBanner: false,
             routes: {
               splashScreen: (context) => SplashScreen(),
@@ -84,8 +73,13 @@ class LoopiApp extends StatelessWidget {
               mapScreen: (context) => MapScreen(),
               paymentsScreen: (context) => PaymentsScreen(),
               paymentRequistBodyScreen: (context) => PaymentRequistBodyScreen(),
+              messageScreen:
+                  (context) => BlocProvider(
+                    create: (context) => ChatCubit(),
+                    child: MessageScreen(),
+                  ),
             },
-            initialRoute: initialRoute,
+            initialRoute: splashScreen,
           );
         },
       ),

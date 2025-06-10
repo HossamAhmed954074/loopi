@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
@@ -15,14 +16,34 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
   Future<void> registerUser({
     required String email,
     required String password,
-  }) async {
+    String? name,
+    String? phoneNumber,
+    String? address,
+    String? fromCity,
+    String? toColleage,
 
+  }) async {
     emit(LoginRegisterLoading());
     try {
       final _ = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(email)
+          .set({
+            'name': name,
+            'email': email,
+            'id' : email,
+            'phone': phoneNumber,
+            'address': address,
+            'fromCity': fromCity,
+            'toColleage': toColleage,        
+          });
+
+
       emit(LoginRegisterSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -37,11 +58,12 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
     }
   }
 
-  Future<void> LoginUser({
+
+
+  Future<void> loginUser({
     required String email,
     required String password,
   }) async {
-
     emit(LoginRegisterLoading());
     this.email = email;
     try {
@@ -65,7 +87,6 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
     emit(LoginRegisterLoading());
 
     await FirebaseAuth.instance.verifyPhoneNumber(
-
       phoneNumber: '+2$phoneNumber',
       timeout: const Duration(minutes: 2),
       verificationCompleted: verificationCompleted,
@@ -93,7 +114,7 @@ class LoginRegisterCubit extends Cubit<LoginRegisterState> {
 
   Future<void> submitedOTP(String otp) async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
-      verificationId: this.verificationId,
+      verificationId: verificationId,
       smsCode: otp,
     );
     await signIn(credential);

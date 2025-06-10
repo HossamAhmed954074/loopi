@@ -7,4 +7,5 @@ class MyColor {
   static Color kBlue = Color(0xff0666EB);
   static Color kLightBlue = Color(0xffE5EFFD);
   static Color kLightGrey = Color(0xffE1E1E1);
+  static Color kbubbleColor = Color(0xff2B475E);
 }
