@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapPlaceDirectionAndAllData {
@@ -7,8 +8,8 @@ class MapPlaceDirectionAndAllData {
   final String totalDuration;
   final String startAddress;
   final String endAddress;
-  final LatLng latLngStart;
-  final LatLng latLngEnd;
+  final GeoPoint latLngStart;
+  final GeoPoint latLngEnd;
 
   MapPlaceDirectionAndAllData({
 
@@ -42,13 +43,12 @@ class MapPlaceDirectionAndAllData {
     );
 
     return MapPlaceDirectionAndAllData(
-
       totalDistance: distance,
       totalDuration: duration,
       startAddress: startAddress,
       endAddress: endAddress,
-      latLngStart: latLngStart,
-      latLngEnd: latLngEnd,
+      latLngStart: GeoPoint(latLngStart.latitude, latLngStart.longitude),
+      latLngEnd: GeoPoint(latLngEnd.latitude, latLngEnd.longitude),
     );
   }
 }

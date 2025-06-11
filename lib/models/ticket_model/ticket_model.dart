@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TicketsModel {
-   String? id;
+  String? id;
   final Timestamp dateTime;
   final GeoPoint startPoint;
   final GeoPoint endPoint;
@@ -9,6 +9,8 @@ class TicketsModel {
   final String startLocation;
   final String endLocation;
   final bool isArrived;
+  final bool isPackUp;
+  final bool isAccepted;
 
   TicketsModel({
     this.id,
@@ -18,13 +20,15 @@ class TicketsModel {
     required this.startLocation,
     required this.endLocation,
     required this.price,
-  required this.isArrived,
-});
+    required this.isArrived,
+    required this.isPackUp,
+    required this.isAccepted,
+  });
 
-  factory TicketsModel.fromSnapShot(Map<String, dynamic> doc,String id) {
+  factory TicketsModel.fromSnapShot(Map<String, dynamic> doc, String id) {
     final data = doc;
     return TicketsModel(
-      id : id,
+      id: id,
       startPoint: data['startPoint'],
       endPoint: data['endPoint'],
       dateTime: data['dateTime'],
@@ -32,6 +36,8 @@ class TicketsModel {
       endLocation: data['endLocation'],
       price: data['price'],
       isArrived: data['isArrived'],
+      isPackUp: data['isPackUp'] ?? false,
+      isAccepted: data['isAccepted'] ?? false,
 
     );
   }

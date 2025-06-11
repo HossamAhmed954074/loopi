@@ -70,16 +70,25 @@ class TicketsCustomWidget extends StatelessWidget {
                   Text(
                     '${ticketsModel.dateTime.toDate().hour} : ${ticketsModel.dateTime.toDate().minute} AM backaup',
                   ),
+                   Text('9:45 AM Arrived'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('9:45 AM Arrived'),
+
+                  if (!ticketsModel.isAccepted)
+                    Text('Accepted', style: TextStyle(color: Colors.red)),
+                  if (ticketsModel.isAccepted)
+                    Text('Accepted', style: TextStyle(color: Colors.green)),
                   if (!ticketsModel.isArrived)
-                    Text('Waiting', style: TextStyle(color: Colors.red)),
+                    Text('Arrived', style: TextStyle(color: Colors.red)),
                   if (ticketsModel.isArrived)
                     Text('Arrived', style: TextStyle(color: Colors.green)),
+                  if (!ticketsModel.isPackUp)
+                    Text('pack up', style: TextStyle(color: Colors.red)),
+                  if (ticketsModel.isPackUp)
+                    Text('pack up', style: TextStyle(color: Colors.green)),
                 ],
               ),
             ],
